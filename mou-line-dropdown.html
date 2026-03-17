@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  .dropdown-container {
+    margin: 10px auto;
+    max-width: 800px;
+    font-family: Season Sans, Arial, Helvetica, sans-serif;
+  }
+  
+  .dropdown-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    display: inline-block;
+    max-width: 300px;
+  }
+  
+  select {
+    width: 100%;
+    padding: 12px 40px 12px 16px;
+    font-size: 14px;
+    font-family: Season Sans, Arial, Helvetica, sans-serif;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #333333;
+    border-radius: 0;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  
+  select:hover {
+    border-color: #555555;
+  }
+  
+  select:focus {
+    border-color: #000000;
+  }
+  
+/*arrow*/
+.dropdown-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-60%) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid #e67e22;
+    border-bottom: 2px solid #e67e22;
+    pointer-events: none;
+  }
+  
+  .chart-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+  }
+  
+  .chart-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .chart-frame.active {
+    opacity: 1;
+    pointer-events: auto;
+    position: relative;
+  }
+</style>
+</head>
+<body>
+
+<div class="dropdown-container">
+  <div class="dropdown-wrapper">
+    <select id="chart-selector">
+      <option value="0">Ethiopia</option>
+      <option value="1">Kenya</option>
+      <option value="2">Liberia</option>
+      <option value="3">Mozambique</option>
+      <option value="4">Nigeria</option>
+      <option value="5">Rwanda</option>
+      <option value="6">Uganda</option>
+    </select>
+  </div>
+  
+  <div class="chart-wrapper" id="chart-container">
+    <!-- All charts pre-loaded, only one visible at a time -->
+    <div class="chart-frame active" data-country="Ethiopia">
+      <iframe title="Ethiopia's Cofinancing Deal, 2026–2030" aria-label="Line chart" id="datawrapper-chart-yt2gG" src="https://datawrapper.dwcdn.net/yt2gG/1/" scrolling="no" frameborder="0" style="border: none;" width="800" height="504" data-external="1"></iframe>
+    </div>
+    
+    <div class="chart-frame" data-country="Kenya">
+     <iframe title="Kenya's Cofinancing Deal, 2026–2030" aria-label="Line chart" id="datawrapper-chart-fGVrZ" src="https://datawrapper.dwcdn.net/fGVrZ/1/" scrolling="no" frameborder="0" style="border: none;" width="800" height="410" data-external="1"></iframe>
+    </div>
+    
+    <div class="chart-frame" data-country="Liberia">
+     <iframe title="Liberia's Cofinancing Deal, 2026–2030" aria-label="Line chart" id="datawrapper-chart-xKkrm" src="https://datawrapper.dwcdn.net/xKkrm/1/" scrolling="no" frameborder="0" style="border: none;" width="800" height="486" data-external="1"></iframe>
+    </div>
+    
+    <div class="chart-frame" data-country="Mozambique">
+      <iframe title="Mozambique's Cofinancing Deal, 2026–2030" aria-label="Line chart" id="datawrapper-chart-aOaDF" src="https://datawrapper.dwcdn.net/aOaDF/1/" scrolling="no" frameborder="0" style="border: none;" width="800" height="410" data-external="1"></iframe>
+    </div>
+    
+    <div class="chart-frame" data-country="Nigeria">
+      <iframe title="Nigeria's Cofinancing Deal, 2026–2030" aria-label="Line chart" id="datawrapper-chart-mH9XU" src="https://datawrapper.dwcdn.net/mH9XU/2/" scrolling="no" frameborder="0" style="border: none;" width="800" height="455" data-external="1"></iframe>
+    </div>
+    
+    <div class="chart-frame" data-country="Rwanda">
+     <iframe title="Rwanda's Cofinancing Deal, 2026–2030" aria-label="Line chart" id="datawrapper-chart-eKogt" src="https://datawrapper.dwcdn.net/eKogt/1/" scrolling="no" frameborder="0" style="border: none;" width="800" height="415" data-external="1"></iframe>
+    </div>
+    
+    <div class="chart-frame" data-country="Uganda">
+      <iframe title="Uganda's Cofinancing Deal, 2026–2030" aria-label="Line chart" id="datawrapper-chart-G70So" src="https://datawrapper.dwcdn.net/G70So/1/" scrolling="no" frameborder="0" style="border: none;" width="800" height="386" data-external="1"></iframe>
+    </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const chartFrames = document.querySelectorAll('.chart-frame');
+  const selector = document.getElementById('chart-selector');
+  
+  // Update chart when dropdown changes
+  selector.addEventListener('change', function() {
+    const index = parseInt(this.value);
+    
+    // Hide all charts and show the selected one
+    chartFrames.forEach((frame, i) => {
+      if (i === index) {
+        frame.classList.add('active');
+      } else {
+        frame.classList.remove('active');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
